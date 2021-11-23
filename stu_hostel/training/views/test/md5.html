@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    密码：<input type="text" id='inp' />
+    <button id='btn'>提交</button><br />
+    md5加密后：<div id='di'></div>
+</body>
+<script type="text/javascript" src="md5.js"></script>
+<script type="text/javascript">
+    var inp = document.getElementById('inp')
+    var btn = document.getElementById('btn')
+    var di = document.getElementById('di')
+    btn.onclick = function () {
+        di.innerHTML = hex_md5(inp.value);
+    }
+</script>
+
+</html>

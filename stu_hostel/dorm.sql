@@ -1,0 +1,509 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : nodeMongo
+ Source Server Type    : MongoDB
+ Source Server Version : 40406
+ Source Host           : localhost:27017
+ Source Schema         : dorm
+
+ Target Server Type    : MongoDB
+ Target Server Version : 40406
+ File Encoding         : 65001
+
+ Date: 20/06/2021 16:20:55
+*/
+
+
+// ----------------------------
+// Collection structure for logistics
+// ----------------------------
+db.getCollection("logistics").drop();
+db.createCollection("logistics");
+
+// ----------------------------
+// Documents of logistics
+// ----------------------------
+db.getCollection("logistics").insert([ {
+    _id: ObjectId("60c9b151f228e77588610824"),
+    username: "admin",
+    password: "14e1b600b1fd579f47433b88e8d85291",
+    jodnum: "460",
+    "created_time": ISODate("2021-06-16T08:07:45.21Z"),
+    phone: "15315677855",
+    dorm: "3A",
+    sex: NumberInt("0"),
+    name: "二大爷",
+    power: NumberInt("0"),
+    __v: NumberInt("0")
+} ]);
+
+// ----------------------------
+// Collection structure for reports
+// ----------------------------
+db.getCollection("reports").drop();
+db.createCollection("reports");
+
+// ----------------------------
+// Documents of reports
+// ----------------------------
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c6ffeebef71e1198cdcd80"),
+    repnum: "2lmCLp",
+    repusername: "",
+    repuser: "李沙雕",
+    repdorm: "45362",
+    repstate: NumberInt("2"),
+    reptime: "2021年06月15日",
+    repcontent: "56",
+    reptype: "土木",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c7593b7b22633d84ca4d63"),
+    repnum: "1KRHPE",
+    repusername: "jack",
+    repuser: "jack",
+    repdorm: "407",
+    repstate: NumberInt("2"),
+    reptime: "2021年06月15日",
+    repcontent: "风扇坏了",
+    reptype: "土木",
+    repphone: "15266322547",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c842c8bd2b1d6d74fdde7a"),
+    repnum: "g6852j",
+    repusername: "666666",
+    repuser: "老恐龙",
+    repdorm: "3A407",
+    repstate: NumberInt("2"),
+    reptime: "2021年06月16日",
+    repcontent: "123",
+    reptype: "水电",
+    repphone: "13827633211",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c85ceb4bd239191c4c1ac2"),
+    repnum: "5L1EAT",
+    repusername: "jack",
+    repuser: "Jack",
+    repdorm: "407",
+    repstate: NumberInt("1"),
+    reptime: "2021年06月15日",
+    repcontent: "jack想完成期末作业",
+    reptype: "水电",
+    repphone: "18027667166",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c8b57ee4f6e40a905b7a7c"),
+    repnum: "bxbiP6",
+    repusername: "sunnyli",
+    repuser: "李沙雕",
+    repdorm: "45362",
+    repstate: NumberInt("-1"),
+    reptime: "2021年06月15日",
+    repcontent: "是输死",
+    reptype: "水电",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c8b580e4f6e40a905b7a7d"),
+    repnum: "8dDJvI",
+    repusername: "sunnyli",
+    repuser: "李沙雕",
+    repdorm: "45362",
+    repstate: NumberInt("-1"),
+    reptime: "2021年06月15日",
+    repcontent: "。。。",
+    reptype: "水电",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c8b580e4f6e40a905b7a7e"),
+    repnum: "gtqNYq",
+    repusername: "sunnyli",
+    repuser: "李沙雕",
+    repdorm: "45362",
+    repstate: NumberInt("1"),
+    reptime: "2021年06月15日",
+    repcontent: "水管破裂",
+    reptype: "水电",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c8b580e4f6e40a905b7a7f"),
+    repnum: "dTCkqi",
+    repusername: "sunnyli",
+    repuser: "李沙雕",
+    repdorm: "45362",
+    repstate: NumberInt("1"),
+    reptime: "2021年06月15日",
+    repcontent: "门坏了",
+    reptype: "其他",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c8b581e4f6e40a905b7a80"),
+    repnum: "AZkBVv",
+    repusername: "sunnyli",
+    repuser: "李沙雕",
+    repdorm: "45362",
+    repstate: NumberInt("-1"),
+    reptime: "2021年06月18日",
+    repcontent: "我很帅",
+    reptype: "水电",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c8b582e4f6e40a905b7a82"),
+    repnum: "If1e39",
+    repusername: "sunnyli",
+    repuser: "李沙雕",
+    repdorm: "45362",
+    repstate: NumberInt("1"),
+    reptime: "2021年06月15日",
+    repcontent: "床板有蛀虫",
+    reptype: "土木",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c8b582e4f6e40a905b7a83"),
+    repnum: "so9Zl7",
+    repusername: "sunnyli",
+    repuser: "李沙雕",
+    repdorm: "45362",
+    repstate: NumberInt("1"),
+    reptime: "2021年06月15日",
+    repcontent: "水龙头坏了",
+    reptype: "水电",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c8b582e4f6e40a905b7a84"),
+    repnum: "2Vgxko",
+    repusername: "sunnyli",
+    repuser: "李沙雕",
+    repdorm: "45362",
+    repstate: NumberInt("2"),
+    reptime: "2021年06月15日",
+    repcontent: "风扇坏了",
+    reptype: "水电",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c8b582e4f6e40a905b7a85"),
+    repnum: "fWJgNo",
+    repusername: "sunnyli",
+    repuser: "李沙雕",
+    repdorm: "45362",
+    repstate: NumberInt("2"),
+    reptime: "2021年06月15日",
+    repcontent: "撤硕冲水坏了",
+    reptype: "水电",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c8b586e4f6e40a905b7a89"),
+    repnum: "8xsPku",
+    repusername: "sunnyli",
+    repuser: "李沙雕",
+    repdorm: "45362",
+    repstate: NumberInt("-1"),
+    reptime: "2021年06月18日",
+    repcontent: "没钱了",
+    reptype: "水电",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c8b586e4f6e40a905b7a8a"),
+    repnum: "vUJWoN",
+    repusername: "sunnyli",
+    repuser: "李沙雕",
+    repdorm: "45362",
+    repstate: NumberInt("0"),
+    reptime: "2021年06月15日",
+    repcontent: "楼上漏水",
+    reptype: "土木",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c8b587e4f6e40a905b7a8b"),
+    repnum: "qCf0kB",
+    repusername: "sunnyli",
+    repuser: "李沙雕",
+    repdorm: "45362",
+    repstate: NumberInt("0"),
+    reptime: "2021年06月15日",
+    repcontent: "灯泡坏了",
+    reptype: "水电",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c8cb3b79d0875cb09f2569"),
+    repnum: "DYq14f",
+    repusername: "jack",
+    repuser: "Jack",
+    repdorm: "407",
+    repstate: NumberInt("0"),
+    reptime: "2021年06月15日",
+    repcontent: "大地光彩",
+    reptype: "水电",
+    repphone: "18027667166",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c8cc7b79d0875cb09f256e"),
+    repnum: "cJzb5Y",
+    repusername: "sunnyli",
+    repuser: "李沙雕",
+    repdorm: "45362",
+    repstate: NumberInt("1"),
+    reptime: "2021年06月15日",
+    repcontent: "洗衣机坏了",
+    reptype: "水电",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c99a56ed74d0771c531fce"),
+    repnum: "0UDIim",
+    repusername: "sunnyli",
+    repuser: "黄番薯",
+    repdorm: "45362",
+    repstate: NumberInt("2"),
+    reptime: "2021年06月16日",
+    repcontent: "手机掉马桶里了",
+    reptype: "水电",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60c9a14f2515a4501ce9aa3e"),
+    repnum: "bjKLuz",
+    repusername: "666666",
+    repuser: "老恐龙",
+    repdorm: "407",
+    repstate: NumberInt("0"),
+    reptime: "2021年06月16日",
+    repcontent: "花洒漏水了\r\n",
+    reptype: "其他",
+    repphone: "13827633211",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("reports").insert([ {
+    _id: ObjectId("60cedb6d33d96e269caae8ed"),
+    repnum: "XoFDhJ",
+    repusername: "jack01",
+    repuser: "老恐龙",
+    repdorm: "407",
+    repstate: NumberInt("2"),
+    reptime: "2021年06月20日",
+    repcontent: "水管裂开",
+    reptype: "水电",
+    repphone: "13411336317",
+    repdormitory: "3A",
+    __v: NumberInt("0")
+} ]);
+
+// ----------------------------
+// Collection structure for stuusers
+// ----------------------------
+db.getCollection("stuusers").drop();
+db.createCollection("stuusers");
+
+// ----------------------------
+// Documents of stuusers
+// ----------------------------
+db.getCollection("stuusers").insert([ {
+    _id: ObjectId("60c45f8d27ae3d43fcb15154"),
+    username: "666666",
+    password: "b9e79361b4040a3f3a71668163d2f058",
+    "created_time": ISODate("2021-06-12T07:17:33.18Z"),
+    phone: "13827633211",
+    dorm: "407",
+    sex: NumberInt("0"),
+    name: "老恐龙",
+    power: NumberInt("2"),
+    __v: NumberInt("0"),
+    dormitory: "3A"
+} ]);
+db.getCollection("stuusers").insert([ {
+    _id: ObjectId("60c465f6494411351c4ae2b5"),
+    username: "123456",
+    password: "14e1b600b1fd579f47433b88e8d85291",
+    "created_time": ISODate("2021-06-12T07:44:54.079Z"),
+    phone: "",
+    dorm: "",
+    sex: NumberInt("-1"),
+    name: "",
+    power: NumberInt("2"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("stuusers").insert([ {
+    _id: ObjectId("60c4702b50566e4f38804d16"),
+    username: "sunnyli",
+    password: "14e1b600b1fd579f47433b88e8d85291",
+    "created_time": ISODate("2021-06-12T08:28:27.179Z"),
+    phone: "13411336317",
+    dorm: "45362",
+    sex: NumberInt("1"),
+    name: "李沙雕",
+    power: NumberInt("2"),
+    __v: NumberInt("0"),
+    dormitory: "3A"
+} ]);
+db.getCollection("stuusers").insert([ {
+    _id: ObjectId("60c7591e7b22633d84ca4d62"),
+    username: "jack",
+    password: "14e1b600b1fd579f47433b88e8d85291",
+    "created_time": ISODate("2021-06-14T13:26:54.159Z"),
+    phone: "18027667166",
+    dorm: "407",
+    dormitory: "3A",
+    sex: NumberInt("0"),
+    name: "Jack",
+    power: NumberInt("2"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("stuusers").insert([ {
+    _id: ObjectId("60c99b69ed74d0771c531fd0"),
+    username: "55555",
+    password: "14e1b600b1fd579f47433b88e8d85291",
+    "created_time": ISODate("2021-06-16T06:34:17.798Z"),
+    phone: "",
+    dorm: "",
+    dormitory: "",
+    sex: NumberInt("-1"),
+    name: "",
+    power: NumberInt("2"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("stuusers").insert([ {
+    _id: ObjectId("60cc629b7b062d4bd425e0ca"),
+    username: "mafu",
+    password: "14e1b600b1fd579f47433b88e8d85291",
+    "created_time": ISODate("2021-06-18T09:08:43.884Z"),
+    phone: "",
+    dorm: "",
+    dormitory: "",
+    sex: NumberInt("-1"),
+    name: "",
+    power: NumberInt("2"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("stuusers").insert([ {
+    _id: ObjectId("60ceda9c33d96e269caae8eb"),
+    username: "jack01",
+    password: "70873e8580c9900986939611618d7b1e",
+    "created_time": ISODate("2021-06-20T06:05:16.124Z"),
+    phone: "13411336317",
+    dorm: "407",
+    dormitory: "3A",
+    sex: NumberInt("0"),
+    name: "老恐龙",
+    power: NumberInt("2"),
+    __v: NumberInt("0")
+} ]);
+
+// ----------------------------
+// Collection structure for users
+// ----------------------------
+db.getCollection("users").drop();
+db.createCollection("users");
+
+// ----------------------------
+// Documents of users
+// ----------------------------
+db.getCollection("users").insert([ {
+    _id: ObjectId("60c45f8d27ae3d43fcb15153"),
+    username: "666666",
+    password: "14e1b600b1fd579f47433b88e8d85291",
+    power: NumberInt("2"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60c465f6494411351c4ae2b4"),
+    username: "123456",
+    password: "14e1b600b1fd579f47433b88e8d85291",
+    power: NumberInt("2"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("users").insert([ {
+    _id: "60c46b5746d87118dc9b2bab",
+    username: "admin",
+    password: "14e1b600b1fd579f47433b88e8d85291",
+    power: 0,
+    __v: 0
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60c4702b50566e4f38804d15"),
+    username: "sunnyli",
+    password: "14e1b600b1fd579f47433b88e8d85291",
+    power: NumberInt("2"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60c7591e7b22633d84ca4d61"),
+    username: "jack",
+    password: "14e1b600b1fd579f47433b88e8d85291",
+    power: NumberInt("2"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60c99b69ed74d0771c531fcf"),
+    username: "55555",
+    password: "14e1b600b1fd579f47433b88e8d85291",
+    power: NumberInt("2"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60cc629b7b062d4bd425e0c9"),
+    username: "mafu",
+    password: "14e1b600b1fd579f47433b88e8d85291",
+    power: NumberInt("2"),
+    __v: NumberInt("0")
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60ceda9c33d96e269caae8ea"),
+    username: "jack01",
+    password: "70873e8580c9900986939611618d7b1e",
+    power: NumberInt("2"),
+    __v: NumberInt("0")
+} ]);

@@ -1,0 +1,64 @@
+<nav class=" navbar-inverse navbar-fixed-top">
+    <div class="container-fluid ">
+        <div class="row navbar-header col-md-10 ">
+            <div class="col-md-offset-1" style="padding: 9px;">
+                {{ if user && user.power === 2 }}
+                <a class="navbar-brand glyphicon glyphicon-home" href="/student"> 宿舍维修系统</a>
+                {{ else if user && user.power === 0 }}
+                <a class="navbar-brand glyphicon glyphicon-home" href="/logistics"> 宿舍维修系统</a>
+                {{ else }}
+                <a class="navbar-brand glyphicon glyphicon-home" href="/"> 宿舍维修系统</a>
+                {{ /if }}
+            </div>
+            <div class="col-md-offset-2" style="padding: 9px;">
+                <span style="color:rgb(209, 197, 197);" id="time-span"></span>
+            </div>
+
+        </div>
+
+
+        <div class="collapse navbar-collapse  col-md-2" id="myNavbar">
+            <ul class="nav navbar-nav  ">
+                {{ if user }}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">
+                        <span class="glyphicon glyphicon-user" style="padding: 12.5px;" aria-hidden="true"></span>
+                        <!-- <img width="20" height="20" src="../public/img/avatar-max-img.png" alt=""> -->
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-current-user">
+                            当前登录用户: {{user.username}}
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        {{ if user.power === 2}}
+                        <li><a href="/student"><img style="width: 20px;height: 20px;"
+                                    src="../../public/img/Icon/mine.png" />个人主页</a></li>
+                        {{ else user.power === 0}}
+                        <li><a href="/logistics"><img style="width: 20px;height: 20px;"
+                                    src="../../public/img/Icon/mine.png" />个人主页</a></li>
+                        {{ /if }}
+
+                        {{ if user.power === 2 }}
+                        <li><a href="/student/setting"> <img style="width: 20px;height: 20px;"
+                                    src="../../public/img/Icon/setting.png" />设置 </a>
+                        </li>
+                        {{ else user.power === 0}}
+                        <li><a href="/logistics/setting"><img style="width: 20px;height: 20px;"
+                                    src="../../public/img/Icon/setting.png" />设置</a></li>
+                        {{ /if }}
+                        <li><a href="/logout"><img style="width: 20px;height: 20px;"
+                                    src="../../public/img/Icon/out.png" />退出</a></li>
+                    </ul>
+                </li>
+                {{ else }}
+                <li><a class="btn navbar-btn" href="/login">登录
+                    </a></li>
+                <li> <a class="btn navbar-btn" href="/register">注册</a></li>
+                {{ /if }}
+            </ul>
+
+        </div>
+    </div>
+</nav>

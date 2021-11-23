@@ -1,0 +1,133 @@
+{{extend '../_layouts/home.html'}}
+{{block 'title'}}{{'维修管理系统 - 首页'}}{{/block}}
+{{block 'body'}}
+<div class="container" style=" height:0px;
+padding-bottom:100%; ">
+    <div class="panel panel-info col-md-5 col-md-offset-4" style="padding: 0px;">
+        <div class="panel-heading">
+            <h3 class="panel-title">编辑</h3>
+        </div>
+        <div class="panel-body">
+
+            <form id="record_from">
+                <div class="form-group">
+                    <label for="">报修单号</label>
+                    <input readonly style="border:none;" name="repnum" value="{{ report.repnum }}">
+                </div>
+                <input type="hidden" name="id" value="{{ report.id }}">
+                <input type="hidden" name="repusername" value="{{ report.repusername }}">
+                <input type="hidden" name="reptime" id='time'>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">报修人</label>
+                    <input type="test" class="form-control" id="exampleInputPassword1" placeholder=""
+                        value="{{ report.repuser }}" name="repuser">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">宿舍楼</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""
+                        value="{{ report.repdormitory }}" name="repdormitory">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">宿舍号</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""
+                        value="{{ report.repdorm }}" name="repdorm">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">电话</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""
+                        value="{{ report.repphone }}" name="repphone">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">报修类型</label>
+                    <!-- <input type="text" class="form-control" id="exampleInputPassword1" placeholder="" name="reptype"> -->
+                    {{ if report.reptype === '水电' }}
+                    <select class="form-control" name="reptype">
+                        <option>水电</option>
+                        <option>土木</option>
+                        <option>其他</option>
+                    </select>
+                    {{ else if report.reptype === '土木' }}
+                    <select class="form-control" name="reptype">
+                        <option>土木</option>
+                        <option>水电</option>
+                        <option>其他</option>
+                    </select>
+                    {{ else }}
+                    <select class="form-control" name="reptype">
+                        <option>其他</option>
+                        <option>土木</option>
+                        <option>水电</option>
+                    </select>
+                    {{ /if }}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">报修内容</label>
+                    <textarea class="form-control" name="repcontent">{{ report.repcontent }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <a class="btn btn-success col-md-2 col-md-offset-2" href="/student/record">返回</a>
+                    <button type="submit" class="btn btn-success col-md-2 col-md-offset-3">提交</button>
+                </div>
+
+
+            </form>
+
+        </div>
+    </div>
+
+
+</div>
+{{/block}}
+{{block 'script'}}
+<script>
+    //时间
+    Date.prototype.format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1,                 //月份
+            "d+": this.getDate(),                    //日
+            "h+": this.getHours(),                   //小时
+            "m+": this.getMinutes(),                 //分
+            "s+": this.getSeconds(),                 //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds()             //毫秒
+        };
+
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        }
+
+        for (var k in o) {
+            if (new RegExp("(" + k + ")").test(fmt)) {
+                fmt = fmt.replace(
+                    RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            }
+        }
+
+        return fmt;
+    }
+    $('#time').val(new Date().format("yyyy年MM月dd日"))
+    $('#record_from').on('submit', function (e) {
+        e.preventDefault()
+        var formData = $(this).serialize()
+
+        $.ajax({
+            url: '/student/record-edit',
+            type: 'post',
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                var err_code = data.err_code
+
+                if (err_code === 2) {
+                    window.alert('提交成功！！')
+                    // 服务端重定向针对异步请求无效
+                    window.location.href = '/student/record'
+                } else if (err_code === 500) {
+                    window.alert('服务器忙，请稍后重试！')
+                }
+            }
+        })
+    })
+</script>
+{{/block}}

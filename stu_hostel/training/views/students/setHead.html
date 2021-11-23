@@ -1,0 +1,87 @@
+{{extend '../_layouts/home.html'}}
+
+{{block 'title'}}{{'维修系统 - 个人设置'}}{{/block}}
+{{ block 'head'}}
+<style>
+    #div1 {
+        border: 1px solid #d8dee2;
+        border-radius: 5px;
+        background-color: #fcfcfc;
+        margin-bottom: 15px;
+        padding: 15px;
+        text-align: left;
+    }
+</style>
+<link rel="stylesheet" href="../../public/css/head.css" />
+
+{{ /block }}
+{{block 'body'}}
+
+<section class="container" style=" height:0px;
+padding-bottom:100%;">
+    {{include '../_partials/settings-nav.html'}}
+    <div class="panel panel-info col-md-5" id='div1' style="padding: 0px;">
+        <div class="panel-heading">
+            <h3 class="panel-title">更换头像</h3>
+        </div>
+        <div class="panel-body">
+
+            <form action="/student/sethead" method="post" class="col-md-offset-4" enctype="multipart/form-data">
+                <!-- <img class="col-md-offset-4" src="../public/img/head/{{ user.head }} "
+                    style=" width: 140px;height: 140px;left:0;top: 0;border-radius: 50%;" />
+
+                <input type="file" name="content" /> -->
+                <input class="btn " type="hidden" value="{{ user._id }}" name="id">
+                <div class="aui-info">
+                    <img src="../public/img/head/{{ user.head }}"
+                        style=" width: 140px;height: 140px;left:0;top: 0;border-radius: 50%;" id="avatar_img"
+                        class="aui-img-round user-img " onclick="imageOnClick() " title="点击选择图片" />
+                    <input type="file" accept="image/*" id="avatar_file" name="content" class="fileInput" value="" />
+                </div>
+                <br />
+                <a class="btn btn-success " href="/student/setting">返回</a>
+                <button type="submit" class="btn btn-success col-md-offset-1">确认</button>
+            </form>
+
+
+
+
+        </div>
+    </div>
+    <div class="col-md-2 profile-avatar">
+        <dl>
+            <dt>头像设置</dt>
+            <dd>
+
+                <a class="btn" href="/student/sethead"><img src="../public/img/head/{{ user.head }} "
+                        style=" width: 140px;height: 140px;left:0;top: 0;border-radius: 50%;" />
+                </a>
+            </dd>
+        </dl>
+    </div>
+</section>
+{{/block}}
+{{block 'script'}}
+<script>
+
+    function imageOnClick() {
+
+        document.getElementById('avatar_file').click();//my_photo隐藏的input[file]的id
+    }
+    $("#avatar_file").change(function () {//avatar_file  input[file]的ID
+        // 获取上传文件对象
+        var file = $(this)[0].files[0];
+        // 读取文件URL
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        // 阅读文件完成后触发的事件
+        reader.onload = function () {
+            // 读取的URL结果：this.result
+            $("#avatar_img").attr("src", this.result);//avatar_img  img标签的ID
+        }
+    });
+</script>
+
+
+
+{{/block}}

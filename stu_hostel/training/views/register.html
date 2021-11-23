@@ -1,0 +1,77 @@
+{{extend './_layouts/home.html'}}
+
+{{block 'title'}}{{'维修管理系统 - 注册'}}{{/block}}
+{{block 'head'}}
+<link rel="stylesheet" href="/public/css/login.css">{{/block}}
+{{block 'body'}}
+<div style=" height:0px;
+padding-bottom:100%;">
+    <div class="main" style="height: 500px;">
+        <div class="header">
+            <h1>用户注册</h1>
+        </div>
+        <!-- 
+      表单具有默认的提交行为，默认是同步的，同步表单提交，浏览器会锁死（转圈儿）等待服务端的响应结果。
+      表单的同步提交之后，无论服务端响应的是什么，都会直接把响应的结果覆盖掉当前页面。
+
+      后来有人想到了一种办法，来解决这个问题。
+     -->
+        <form id="register_form" method="post" action="/register">
+            <div class="form-group">
+                <label for="us">用户名</label>
+                <input type="text" class="form-control" id="us" name="username" placeholder="username" autofocus>
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                    minlength="6" maxlength="15">
+            </div>
+            <div class="form-group">
+                <label for="">学校</label>
+                <input type="text" class="form-control" placeholder="school" autofocus>
+            </div>
+            <div class="form-group">
+                <label for="">学号</label>
+                <input type="text" class="form-control" placeholder="sno" autofocus>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">注册</button>
+
+        </form>
+        <div class="message">
+            <p>已有账号? <a href="/login">点击登录</a>.</p>
+        </div>
+    </div>
+</div>
+{{/block}}
+{{block 'script'}}
+<script>
+    $('#register_form').on('submit', function (e) {
+        e.preventDefault()
+
+        //ajax请求
+        var formData = $(this).serialize()
+        $.ajax({
+            url: '/register',
+            type: 'post',
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                var err_code = data.err_code
+                if (err_code === 2) {
+                    // window.alert('注册成功,登录学生页面！')
+                    // 服务端重定向针对异步请求无效
+                    window.location.href = '/student'
+                } else if (err_code === 1) {
+                    window.alert('用户名已存在！')
+                } else if (err_code === 3) {
+                    window.alert('用户名不规范')
+                } else if (err_code === 500) {
+                    window.alert('服务器忙，请稍后重试！')
+                }
+            }
+        })
+
+    })
+
+</script>
+{{/block}}

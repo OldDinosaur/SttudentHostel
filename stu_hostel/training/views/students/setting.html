@@ -1,0 +1,154 @@
+{{extend '../_layouts/home.html'}}
+
+{{block 'title'}}{{'维修系统 - 个人设置'}}{{/block}}
+{{ block 'head'}}
+<style>
+    #div1 {
+        border: 1px solid #d8dee2;
+        border-radius: 5px;
+        background-color: #fcfcfc;
+        margin-bottom: 15px;
+        padding: 15px;
+        text-align: left;
+    }
+</style>
+
+{{ /block }}
+{{block 'body'}}
+
+<section class="container" style=" height:0px;
+padding-bottom:100%;">
+    {{include '../_partials/settings-nav.html'}}
+    <div class="panel panel-info col-md-5" id='div1' style="padding: 0px;">
+        <div class="panel-heading">
+            <h3 class="panel-title">基本信息</h3>
+        </div>
+        <div class="panel-body">
+
+            <form id="set_from">
+                <input type="hidden" value="{{ user._id }}" name="id">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">账号</label>
+                    <p class="form-control-static" name="username">{{ user.username }}</p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">姓名</label>
+                    <input type="test" class="form-control" id="exampleInputPassword1" placeholder=""
+                        value="{{ user.name }}" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">性别</label>
+                    {{ if user.sex==0}}
+                    <div>
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" id="inlineRadio1" value="0" checked> 男
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" id="inlineRadio2" value="1"> 女
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" id="inlineRadio3" value="-1"> 保密
+                        </label>
+                    </div>
+                    {{ else if user.sex==1 }}
+                    <div>
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" id="inlineRadio1" value="0"> 男
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" id="inlineRadio2" value="1" checked> 女
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" id="inlineRadio3" value="-1"> 保密
+                        </label>
+                    </div>
+                    {{ else if user.sex==-1 }}
+                    <div>
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" id="inlineRadio1" value="0"> 男
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" id="inlineRadio2" value="1"> 女
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sex" id="inlineRadio3" value="-1" checked> 保密
+                        </label>
+                    </div>
+                    {{ /if }}
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">宿舍楼</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""
+                        value="{{ user.dormitory }}" name="dormitory">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">宿舍号</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""
+                        value="{{ user.dorm }}" name="dorm">
+                </div>
+                <div class="form-group">
+                    <label for="word1">电话</label>
+                    <input type="text" class="form-control" id="word1" placeholder="" value="{{ user.phone }}"
+                        name="phone">
+                </div>
+                <a class="btn btn-success" href="/student">返回</a>
+                <button type="submit" class="btn btn-success">保存</button>
+
+            </form>
+
+        </div>
+    </div>
+    <div class="col-md-2 profile-avatar">
+        <dl>
+            <dt>头像设置</dt>
+            <dd>
+
+                <a class="btn" href="/student/sethead" title="点击更换头像"><img src="../public/img/head/{{ user.head }} "
+                        style=" width: 140px;height: 140px;left:0;top: 0;border-radius: 50%;" />
+                </a>
+            </dd>
+        </dl>
+    </div>
+</section>
+{{/block}}
+{{block 'script'}}
+
+<script>
+
+
+    $('#set_from').on('submit', function (e) {
+        e.preventDefault()
+        //手机号正则
+        var myreg = /^[1][3,4,5,7,8][0-9]{9}$/
+        var phone = document.getElementById('word1').value
+        //电话可以为空，不为空的话需要符合格式
+        if (phone != '') {
+            if (!myreg.test(phone)) {
+                window.alert('请正确填写手机号')
+                return false
+            }
+        }
+
+
+        var formData = $(this).serialize()
+
+        $.ajax({
+            url: '/student/setting',
+            type: 'post',
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                var err_code = data.err_code
+                if (err_code === 2) {
+                    window.alert('保存成功！！')
+                    // 服务端重定向针对异步请求无效
+                    window.location.href = '/student/setting'
+                } else if (err_code === 500) {
+                    window.alert('服务器忙，请稍后重试！')
+                }
+            }
+        })
+    })
+</script>
+{{/block}}

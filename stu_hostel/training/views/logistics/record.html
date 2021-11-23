@@ -1,0 +1,283 @@
+{{extend '../_layouts/home.html'}}
+{{block 'title'}}{{'维修管理系统 - 首页'}}{{/block}}
+{{block 'body'}}
+<div class="container" style=" height:0px;
+padding-bottom:100%;">
+    <div class="col-md-2 list-group">
+        <a href="/logistics" class="list-group-item ">发布公告</a>
+        <a href="/logistics/record" class="list-group-item active">报修单</a>
+        <a href="" class="list-group-item ">舍管</a>
+        <a href="" class="list-group-item ">维修人员</a>
+
+    </div>
+    <div class="table-responsive col-md-9">
+        <div class="row">
+            <form class="form-inline col-md-offset-7">
+                <div class="form-group">
+                    <select name="option" id="" class="btn btn-default">
+                        <option value="表单号">表单号</option>
+                        <option value="宿舍号">宿舍号</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name='conment'>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-info " value="查询">
+                </div>
+            </form>
+            <!-- <a download="table导出Excel" id="excelOut" href="#">table导出Excel</a> -->
+            <table class="table table-striped" id="table">
+                <thead>
+                    <tr>
+
+                        <th>报修单号</th>
+                        <th>报修人</th>
+                        <th>电话</th>
+                        <th>宿舍楼</th>
+                        <th>宿舍号</th>
+                        <th>内容</th>
+                        <th>时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="tableTest">
+                    {{ each reports}}
+                    <tr>
+                        <td>{{$value.repnum}}</td>
+                        <td>{{$value.repuser}}</td>
+                        <td>{{$value.repphone}}</td>
+                        <td>{{$value.repdormitory}}</td>
+                        <td>{{$value.repdorm}}</td>
+                        <td>{{$value.repcontent}}</td>
+                        <td>{{$value.reptime}}</td>
+                        {{ if $value.repstate == -1 }}
+                        <td><a class="btn btn-danger btn-sm">已驳回</a></td>
+                        {{ else if $value.repstate == 0 }}
+                        <td><a class="btn btn-warning btn-sm modd" data-toggle="modal"
+                                data-target="#{{ $index }}">审核中</a>
+                            <!-- 模态框（Modal） -->
+                            <div class="modal fade" id="{{ $index }}" tabindex="-1" role="dialog"
+                                aria-labelledby="{{ $value._id }}" aria-hidden="true">
+                                <div class="modal-dialog">
+
+                                    <div class="modal-content">
+                                        <form class="rec_form">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="{{ $index_id }}">维修状态</h4>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <div class="form-group">
+                                                    <input type="hidden" name='id' value="{{ $value.id }}">
+
+                                                    <label for="recipient-name" class="control-label">状态:</label>
+
+                                                    <!-- 单选按钮 -->
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="repstate" id="" value="-1"> 已驳回
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="repstate" id="" value="0" checked> 审核中
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="repstate" id="" value="1"> 维修中
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="repstate" id="" value="2"> 已完成
+                                                    </label>
+
+                                                    <!-- <input type="text" class="form-control" value="{{ $value.repstate }}"
+                                                    name="repstate"> -->
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="message-text" class="control-label">消息:</label>
+                                                    <textarea class="form-control" name="message"></textarea>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">关闭</button>
+                                                <input type="submit" class="btn btn-primary" value="提交修改">
+                                            </div>
+                                        </form>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal -->
+                            </div>
+                        </td>
+                        {{ else if $value.repstate == 1 }}
+                        <!-- 维修状态模态框 -->
+                        <td><a class="btn btn-info btn-sm modd" data-toggle="modal" data-target="#{{ $index }}">维修中</a>
+                            <!-- 模态框（Modal） -->
+                            <div class="modal fade" id="{{ $index }}" tabindex="-1" role="dialog"
+                                aria-labelledby="{{ $value._id }}" aria-hidden="true">
+                                <div class="modal-dialog">
+
+                                    <div class="modal-content">
+                                        <form class="rec_form">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="{{ $index_id }}">维修状态</h4>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <div class="form-group">
+                                                    <input type="hidden" name='id' value="{{ $value.id }}">
+
+                                                    <label for="recipient-name" class="control-label">状态:</label>
+
+                                                    <!-- 单选按钮 -->
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="repstate" id="" value="-1"> 已驳回
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="repstate" id="" value="0"> 审核中
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="repstate" id="" value="1" checked> 维修中
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="repstate" id="" value="2"> 已完成
+                                                    </label>
+
+                                                    <!-- <input type="text" class="form-control" value="{{ $value.repstate }}"
+                                                    name="repstate"> -->
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="message-text" class="control-label">消息:</label>
+                                                    <textarea class="form-control" name="message"></textarea>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">关闭</button>
+                                                <input type="submit" class="btn btn-primary" value="提交修改">
+                                            </div>
+                                        </form>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal -->
+                            </div>
+                        </td>
+                        {{ else if $value.repstate == 2 }}
+                        <!-- 完成状态模态框 -->
+                        <td><a class="btn btn-success btn-sm modd" data-toggle="modal"
+                                data-target="#{{ $index }}">已完成</a>
+                            <!-- 模态框（Modal） -->
+                            <div class="modal fade" id="{{ $index }}" tabindex="-1" role="dialog"
+                                aria-labelledby="{{ $value._id }}" aria-hidden="true">
+                                <div class="modal-dialog">
+
+                                    <div class="modal-content">
+                                        <form class="rec_form">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="{{ $index_id }}">维修状态</h4>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <div class="form-group">
+                                                    <input type="hidden" name='id' value="{{ $value.id }}">
+
+                                                    <label for="recipient-name" class="control-label">状态:</label>
+                                                    <!-- 单选按钮 -->
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="repstate" id="" value="-1"> 已驳回
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="repstate" id="" value="0"> 审核中
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="repstate" id="" value="1"> 维修中
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="repstate" id="" value="2" checked> 已完成
+                                                    </label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="message-text" class="control-label">消息:</label>
+                                                    <textarea class="form-control" name="message"></textarea>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">关闭</button>
+                                                <input type="submit" class="btn btn-primary" value="提交修改">
+                                            </div>
+                                        </form>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal -->
+                            </div>
+                        </td>
+                        {{ /if }}
+                        <td>
+                            <!-- {{ if $value.repstate == 2 || $value.repstate == 1 }}
+                        <a class="btn btn-info btn-sm" disabled="false" title="当前状态不可更改">编辑</a>
+                        {{ else }}
+                        <a class="btn btn-info btn-sm" href="/student/record-edit?id={{$value.id}}">编辑</a>
+                        {{ /if }} -->
+                            <a class="btn btn-danger btn-sm" href="">删除</a>
+                        </td>
+                    </tr>
+
+                    {{ /each }}
+
+                </tbody>
+            </table>
+            <nav aria-label="...">
+                <ul class="pager">
+                    <li id="spanFirst"><a>首页</a></li>
+                    <li id="spanPre"><a>上一页</a></li>
+                    <li id="spanNext"><a>下一页</a></li>
+                    <li id="spanLast"><a>尾页</a></li>
+                    第<li id="spanPageNum"></li>页/
+                    共<li id="spanTotalPage"><a></a></li>页
+
+                </ul>
+            </nav>
+        </div>
+
+
+    </div>
+    {{/block}}
+    {{block 'script'}}
+    <script src="../../public/js/paging.js"></script>
+    <script>
+
+        var num = document.querySelectorAll('.rec_form')
+
+        $('.rec_form').on('submit', function (e) {
+            e.preventDefault()
+            var formData = $(this).serialize()
+            console.log(formData)
+            $.ajax({
+                url: '/logistics/record',
+                type: 'post',
+                data: formData,
+                dataType: 'json',
+                success: function (data) {
+                    var err_code = data.err_code
+                    console.log(data)
+                    if (err_code === 2) {
+                        window.alert('提交成功！！')
+                        // 服务端重定向针对异步请求无效
+                        // window.location.href = '/logistics/record'
+                        location.reload()
+                    } else if (err_code === 500) {
+                        window.alert('服务器忙，请稍后重试！')
+                    }
+                }
+            })
+        })
+
+
+    </script>
+
+    {{/block}}

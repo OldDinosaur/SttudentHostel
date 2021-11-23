@@ -1,0 +1,7 @@
+training文件夹为项目整个项目文件，里面的目录及文件可看报告说明；
+
+
+dorm.sql文件为Mongodb数据库的数据：
+     可以在安装Mongodb数据库后在Navicat Premium 15软件或其他软件中连接到
+  Mongodb数据库再执行该sql文件，
+  

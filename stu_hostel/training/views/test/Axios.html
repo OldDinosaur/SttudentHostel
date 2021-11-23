@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios发送AjAX请求</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
+</head>
+
+<body>
+    <button>get</button>
+    <button>post</button>
+    <button>ajax</button>
+</body>
+<script>
+    const btn = document.querySelectorAll('button')
+    btn[2].onclick = function () {
+        axios({
+            method: 'POST',
+            //url
+            url: '/axios',
+            //url参数
+            params: {
+                vip: 200,
+                lev: 30
+            },
+            //头信息
+            headers: {
+                a: 100,
+                b: 300
+            },
+            //请求体参数
+            data: {
+                username: 'admin',
+                password: 'admin'
+            },
+        }).then(res => (
+            console.log(res.data.name)
+        ))
+    }
+</script>
+<!-- //jsonp原理 -->
+<script src="http://127.0.0.1:3000/jsonp"></script>
+
+</html>

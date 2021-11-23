@@ -1,0 +1,110 @@
+{{extend '../_layouts/home.html'}}
+{{block 'title'}}{{'维修管理系统 - 首页'}}{{/block}}
+{{ block 'head' }}
+<style>
+    table {
+        width: 100%;
+        table-layout: unset
+    }
+</style>
+
+{{ /block }}
+{{block 'body'}}
+
+<div class="container" style=" height:0px;
+padding-bottom:100%;">
+    <!-- <ul class="nav nav-pills nav-stacked col-md-2" style="display: block;float: left;">
+        <li role="presentation" class="active"><a href="/student">公告</a></li>
+        <li role="presentation"><a href="/student/report">报修</a></li>
+        <li role="presentation"><a href="#">记录</a></li>
+    </ul> -->
+    <div class="col-md-2 list-group">
+        <a href="/student/notice" class="list-group-item ">公告</a>
+        <a href="/student/report" class="list-group-item ">报修</a>
+        <a href="/student/record" class="list-group-item active">记录</a>
+    </div>
+    <div class="table-responsive col-md-9">
+        <table class="table table-striped" id="table">
+            <thead>
+                <tr>
+
+                    <th>报修单号</th>
+                    <th>报修人</th>
+                    <th>宿舍楼</th>
+                    <th>宿舍号</th>
+                    <th>内容</th>
+                    <th>时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="tableTest">
+                {{ each reports}}
+                <tr>
+                    <td>{{$value.repnum}}</td>
+                    <td>{{$value.repuser}}</td>
+                    <td>{{$value.repdormitory}}</td>
+                    <td>{{$value.repdorm}}</td>
+                    <td><textarea>{{$value.repcontent}}</textarea></td>
+                    <td>{{$value.reptime}}</td>
+                    {{ if $value.repstate == -1 }}
+                    <td><a class="btn btn-danger btn-sm">已驳回</a></td>
+                    {{ else if $value.repstate == 0 }}
+                    <td><a class="btn btn-warning btn-sm">审核中</a></td>
+                    {{ else if $value.repstate == 1 }}
+                    <td><a class="btn btn-info btn-sm">维修中</a></td>
+                    {{ else if $value.repstate == 2 }}
+                    <td><a class="btn btn-success btn-sm">已完成</a></td>
+                    {{ /if }}
+                    <td>
+                        {{ if $value.repstate == 2 || $value.repstate == 1 }}
+                        <a class="btn btn-info btn-sm" disabled="false" title="当前状态不可更改">编辑</a>
+                        {{ else }}
+                        <a class="btn btn-info btn-sm" href="/student/record-edit?id={{$value.id}}">编辑</a>
+                        {{ /if }}
+                        <a class="btn btn-danger btn-sm del1" href="/student/record-delete?id={{$value.id}}">删除</a>
+                    </td>
+                </tr>
+
+
+                {{ /each }}
+
+            </tbody>
+        </table>
+        <nav aria-label="...">
+            <ul class="pager">
+                <li id="spanFirst"><a>首页</a></li>
+                <li id="spanPre"><a>上一页</a></li>
+                <li id="spanNext"><a>下一页</a></li>
+                <li id="spanLast"><a>尾页</a></li>
+                第<li id="spanPageNum"></li>页/
+                共<li id="spanTotalPage"><a></a></li>页
+
+            </ul>
+        </nav>
+    </div>
+
+
+</div>
+{{/block}}
+{{block 'script'}}
+
+<script src="../../public/js/paging.js"></script>
+<script>
+    var del1 = document.querySelectorAll('.del1')
+    var hid = document.querySelectorAll('.hid')
+    for (var i = 0; i < del1.length; i++) {
+        del1[i].onclick = function (e) {
+
+            var r = confirm('确认删除？')
+            if (r == true) {
+                return true
+            }
+            if (r == false) {           //取消的话阻止默认提交事件
+                e.preventDefault()
+            }
+        }
+    }
+</script>
+<!-- 删除确认 -->
+{{/block}}
